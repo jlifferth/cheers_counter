@@ -3,4 +3,4 @@ Simple web app that displays historic LinkedIn conversation data between myself 
 
 View the live web app here [Cheers Counter](https://share.streamlit.io/jlifferth/cheers_counter/main/main.py) or with the QR code below
 
-![](assets/qr-code-2.png)
+<img src="assets/qr-code-2.png" width="200" height="200">
