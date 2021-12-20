@@ -1,8 +1,10 @@
-import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import dates as mpl_dates
+
+# this setting silences the SettingWithCopyWarning
+pd.options.mode.chained_assignment = None
 
 df = pd.read_csv('assets/messages.csv', usecols=['DATE', 'FROM', 'CONTENT'])
 
@@ -30,9 +32,6 @@ by_day = cheers_df.groupby(pd.Grouper(key='DATETIME', axis=0,
 by_day.reset_index(level=0, inplace=True)
 # print(by_day)
 
-# date = by_day['DATETIME']
-# count = by_day['COUNT']
-
 # create function to filter by date
 
 
@@ -59,10 +58,8 @@ plot_df = pd.DataFrame(columns=['DATE', 'COUNT'])
 plot_df['DATE'] = date
 plot_df['COUNT'] = count
 # print(plot_df)
-plt.plot(plot_df)
+# plt.plot(plot_df)
 # plt.show()
-
-# st.pyplot(plot_df)
 
 
 def plot_cheers(x, y):

@@ -1,3 +1,4 @@
+import streamlit as st
 import datetime
 import plotly.graph_objects as go
 from functions import *
@@ -37,7 +38,7 @@ def calculate_total_count():
 
 def calculate_maximums():
     # calculate max day
-    max_day = filtered_df.loc[by_day['COUNT'].idxmax()]
+    max_day = by_day.loc[by_day['COUNT'].idxmax()]
     max_day_count = str(max_day[1])
     max_day_date = str(max_day[0])
     max_day_date = max_day_date.split(' ')
@@ -90,6 +91,12 @@ count = np.array(count)
 
 
 def calculate_response_times():
+    def format_time(time_in):
+        time_in = str(time_in).split(' ')
+        time_str = time_in[2].split(':')
+        final = time_in[0] + ' ' + time_in[1] + ', ' + time_str[0] + ' hours, and ' + time_str[1] + ' minutes'
+        return final
+
     response_df = cheers_df  # this needs to be replaced with a time filtered df
     # st.dataframe(filtered_df)
     datetime_series = response_df['DATETIME']
@@ -104,17 +111,21 @@ def calculate_response_times():
     response_df['DELTA'] = response_times
 
     # format these dates so they read more naturally
+    response_df = filter_by_date(input_df=response_df, start_date=new_start, end_date=new_end)
     delta_mean = response_df['DELTA'].mean()
+    delta_mean = format_time(delta_mean)
     delta_mean_out = 'Our average response time is : ' + str(delta_mean)
 
     # jonathan mean
     is_jonathan = response_df.loc[(response_df['FROM'] == 'Jonathan Lifferth')]
     jonathan_mean = is_jonathan['DELTA'].mean()
+    jonathan_mean = format_time(jonathan_mean)
     jonathan_mean_out = "Jonathan's average response time is : " + str(jonathan_mean)
 
     # ben mean
     is_ben = response_df.loc[(response_df['FROM'] == 'Ben Darger')]
     ben_mean = is_ben['DELTA'].mean()
+    ben_mean = format_time(ben_mean)
     ben_mean_out = "Ben's average response time is : " + str(ben_mean)
 
     return delta_mean_out, jonathan_mean_out, ben_mean_out
