@@ -155,7 +155,10 @@ def cheers_graph():
 
 
 cheers_graph()
-st.balloons()
+if st.checkbox("Toggle balloons"):
+    pass
+else:
+    st.balloons()
 
 # display most recent update
 last_update = cheers_df['DATETIME'].iloc[-1]
