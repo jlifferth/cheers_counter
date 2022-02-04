@@ -92,7 +92,9 @@ count = np.array(count)
 
 def calculate_response_times():
     def format_time(time_in):
+        print('time_in: ', time_in)
         time_in = str(time_in).split(' ')
+        print('time_in: ', time_in)
         time_str = time_in[2].split(':')
         final = time_in[0] + ' ' + time_in[1] + ', ' + time_str[0] + ' hours, and ' + time_str[1] + ' minutes'
         return final
@@ -117,8 +119,10 @@ def calculate_response_times():
     delta_mean_out = 'Our average response time is : ' + str(delta_mean)
 
     # jonathan mean
-    is_jonathan = response_df.loc[(response_df['FROM'] == 'Jonathan Lifferth')]
+    is_jonathan = response_df.loc[((response_df['FROM'] == 'Jonathan Lifferth') | (response_df['FROM'] == 'LinkedIn Member'))]
+    print('is_jonathan: ', is_jonathan)
     jonathan_mean = is_jonathan['DELTA'].mean()
+    print('jonathan_mean: ', jonathan_mean)
     jonathan_mean = format_time(jonathan_mean)
     jonathan_mean_out = "Jonathan's average response time is : " + str(jonathan_mean)
 
@@ -164,6 +168,7 @@ else:
 last_update = cheers_df['DATETIME'].iloc[-1]
 last_update = str(last_update).split(' ')
 last_update = last_update[0]
+print(last_update)
 last_update_message = 'Data was last updated from LinkedIn on ' + str(last_update)
 col31, col32, col33 = st.columns([3, 8, 2])
 with col31:
