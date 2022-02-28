@@ -6,7 +6,7 @@ from matplotlib import dates as mpl_dates
 # this setting silences the SettingWithCopyWarning
 pd.options.mode.chained_assignment = None
 
-df = pd.read_csv('assets/messages.csv', usecols=['DATE', 'FROM', 'CONTENT'])
+df = pd.read_csv('assets/messages-3.csv', usecols=['DATE', 'FROM', 'CONTENT'])
 
 # create df only with 'Cheers' messages
 cheers_df = df[df.CONTENT == 'Cheers']
